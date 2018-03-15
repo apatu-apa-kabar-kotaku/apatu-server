@@ -1,9 +1,21 @@
-const express        = require('express');
-const router         = express.Router();
-const PostController = require('../controllers/PostController');
+const express           = require('express');
+const router            = express.Router();
+const {uploadFile,read}     = require('../controllers/PostController');
+const {sendUploadToGCS} = require('../middleware/uploadGCS') 
+const multer = require('multer')
 
-router.get('/', function(req, res, next) {
-  res.send('This is post resource');
-});
+const upload = multer({
+   storage  : multer.memoryStorage(),
+   limits   : {
+     fileSize: 10*1024*1024
+  } 
+ })
+
+router.get('/')
+router.post('/upload',upload.single('post'),sendUploadToGCS,uploadFile) 
+
+
+
+
 
 module.exports = router;
