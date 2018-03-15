@@ -27,7 +27,8 @@ module.exports = {
     readFile:(req,res)=>{
         Post
         .find()
-        .exect()
+        // .populate('user_id')
+        .exec()
         .then(allpost=>{
             res.status(200).json({
                 message : `success show allpost`,
@@ -41,7 +42,7 @@ module.exports = {
     },
     findByIdUserPost:(req,res)=>{
         let userid = req.params.user_id
-        post
+        Post
         .findById({user_id:userid})
         .then(post=>{
             res.status(200).json({
@@ -56,7 +57,7 @@ module.exports = {
     },
     deletePost:(req,res)=>{
         let userid = req.params.user_id
-        post
+        Post
         .findById({user_id:userid})
         .then(postUser=>{
             let id = req.params.id
@@ -72,6 +73,23 @@ module.exports = {
         }).catch(err=>{
             res.status(400).json({
                 message : `cant find post`
+            })
+        })
+    },
+    findByCategories:(req,res)=>{
+        let categories = req.query.caption
+        Post
+        .find({
+                caption:categories
+            })
+        .then(post=>{
+            res.status(200).json({
+                message: ` success find categories`,
+                data:post
+            })
+        }).catch(err=>{
+            res.status(400).json({
+                message : `error find post categories`
             })
         })
     }

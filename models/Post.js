@@ -2,8 +2,9 @@ const mongoose   = require('mongoose')
 const Schema     = mongoose.Schema
 
 const postSchema = new Schema({
-    title : String,
-    image : String,
+    title   : String,
+    image   : String,
+    caption : String,
     user_id: {
         type:Schema.Types.ObjectId, 
         ref: 'User'
