@@ -25,7 +25,73 @@ module.exports = {
         })
     },
     readFile:(req,res)=>{
-        
+        Post
+        .find()
+        // .populate('user_id')
+        .exec()
+        .then(allpost=>{
+            res.status(200).json({
+                message : `success show allpost`,
+                data : allpost
+            })
+        }).catch(err=>{
+            res.status(400).json({
+                message : `cannot find post ${err}`
+            })
+        })
+    },
+    findByIdUserPost:(req,res)=>{
+        let userid = req.params.user_id
+        Post
+        .findById({user_id:userid})
+        .then(post=>{
+            res.status(200).json({
+                message : `success show post`,
+                data:post
+            })
+        }).catch(err=>{
+            res.status(400).json({
+                message : `error find post`
+            })
+        })
+    },
+    deletePost:(req,res)=>{
+        let userid = req.params.user_id
+        Post
+        .findById({user_id:userid})
+        .then(postUser=>{
+            let id = req.params.id
+            postUser
+            .deleteOne({_id:id})
+            .then(postdelete=>{
+                res.status(200).json({
+                    message : `delete post success`
+                })
+            }).catch(err=>{
+                message : `failed delete post `
+            })
+        }).catch(err=>{
+            res.status(400).json({
+                message : `cant find post`
+            })
+        })
+    },
+    findByCategories:(req,res)=>{
+        let categories = req.query.caption
+        Post
+        .find({
+                caption:categories
+            })
+        .then(post=>{
+            res.status(200).json({
+                message: ` success find categories`,
+                data:post
+            })
+        }).catch(err=>{
+            res.status(400).json({
+                message : `error find post categories`
+            })
+        })
     }
 }
  
