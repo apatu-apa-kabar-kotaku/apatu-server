@@ -22,8 +22,10 @@ module.exports = {
                     data : newpost 
                 })
             }
-            
         })
+    },
+    readFile:(req,res)=>{
+        
     }
 }
  

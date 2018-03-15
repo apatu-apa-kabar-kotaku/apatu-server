@@ -1,6 +1,6 @@
 const express           = require('express');
 const router            = express.Router();
-const {uploadFile,read}     = require('../controllers/PostController');
+const {uploadFile,readFile}     = require('../controllers/PostController');
 const {sendUploadToGCS} = require('../middleware/uploadGCS') 
 const multer = require('multer')
 
