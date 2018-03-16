@@ -5,7 +5,7 @@ const cors            = require('cors')
 var app = express();
 require('dotenv').config()
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://agnynureza:12345@ds115219.mlab.com:15219/apatudb')
+mongoose.connect('mongodb://reynaldi:12345@ds163417.mlab.com:63417/apatudb')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
