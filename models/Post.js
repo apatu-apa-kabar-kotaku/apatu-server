@@ -16,7 +16,8 @@ const postSchema = new Schema({
     downvote : [{
         type:Schema.Types.ObjectId, 
         ref: 'User'
-    }]
+    }],
+    category : String
 })
 
 let Post         = mongoose.model('Post', postSchema)
